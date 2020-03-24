@@ -184,23 +184,23 @@ contract Location is
         return SafeMath.div(toOwner, 100);
     }
 
-    function buyThing(uint256 _tokenId) public payable returns (bool) {
-        require(msg.value >= items[_tokenId].price, "Price issue");
-        require(TokenState.ForSale == items[_tokenId].state, "No Sale");
+    // function buyThing(uint256 _tokenId) public payable returns (bool) {
+    //     require(msg.value >= items[_tokenId].price, "Price issue");
+    //     require(TokenState.ForSale == items[_tokenId].state, "No Sale");
 
-        if (items[_tokenId].price >= 0) {
-            uint256 fee = mintbaseFee(msg.value);
-            uint256 withFee = SafeMath.sub(msg.value, fee);
+    //     if (items[_tokenId].price >= 0) {
+    //         uint256 fee = mintbaseFee(msg.value);
+    //         uint256 withFee = SafeMath.sub(msg.value, fee);
 
-            maker.transfer(withFee);
-            feeAddress.transfer(fee);
-        }
+    //         maker.transfer(withFee);
+    //         feeAddress.transfer(fee);
+    //     }
 
-        _transferFrom(maker, msg.sender, _tokenId);
-        items[_tokenId].state = TokenState.Sold;
+    //     _transferFrom(maker, msg.sender, _tokenId);
+    //     items[_tokenId].state = TokenState.Sold;
 
-        emit Bought(_tokenId, items[_tokenId].metaId, msg.value);
-    }
+    //     emit Bought(_tokenId, items[_tokenId].metaId, msg.value);
+    // }
 
     function destroyAndSend() public onlyOwner {
         emit Destroy();
